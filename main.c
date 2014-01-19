@@ -54,7 +54,6 @@ static int thread1()
         if (x == 500)
             direction = false;
         x = (direction == true) ? (x + 1) : (x - 1);
-        //y = (y <= 500) ? (y + 5) : (y - 5);
         co_sleep (300000);
     }
     return 0;
@@ -73,8 +72,6 @@ static int thread2()
         if (x == 498/*500*/)
             direction = false;
         x = (direction == true) ? (x + 3) : (x - 3);
-        //x = (x <= 500) ? (x + 5) : (x - 5);
-        //y = (y <= 500) ? (y + 5) : (y - 5);
         co_sleep (300000);
     }
     return 0;
@@ -93,8 +90,6 @@ static int thread3()
         if (x == 500)
             direction = false;
         x = (direction == true) ? (x + 5) : (x - 5);
-        //x = (x <= 500) ? (x + 5) : (x - 5);
-        //y = (y <= 500) ? (y + 5) : (y - 5);
         co_sleep (300000);
     }
     return 0;
@@ -113,58 +108,59 @@ static int thread4()
         if (x == 500)
             direction = false;
         x = (direction == true) ? (x + 1) : (x - 1);
-        //x = (x <= 500) ? (x + 5) : (x - 5);
-        //y = (y <= 500) ? (y + 5) : (y - 5);
         co_sleep (300000);
     }
     return 0;
 }
+
 /******************/
 
-//static int thread1()
-//{
-//    while (1) {
-//        printf("%d %c \n", 1, 'a');
-//        fflush(stdout);
-//        co_sleep (100000);
-//    }
-//    return 0;
-//}
+#ifdef ANOTHER_EXAMPLE
+static int thread1()
+{
+    while (1) {
+        printf("%d %c \n", 1, 'a');
+        fflush(stdout);
+        co_sleep (100000);
+    }
+    return 0;
+}
 
-//static int thread2()
-//{
-//    while (1) {
-//        printf("%d %c \n", 2, 'b');
-//        fflush(stdout);
-//        co_sleep (100000);
-//    }
-//    return 0;
-//}
+static int thread2()
+{
+    while (1) {
+        printf("%d %c \n", 2, 'b');
+        fflush(stdout);
+        co_sleep (100000);
+    }
+    return 0;
+}
 
-//static int thread3()
-//{
-//    while (1) {
-//        printf("%d %c \n", 3, 'c');
-//        fflush(stdout);
-//        co_sleep (100000);
-//    }
-//    return 0;
-//}
+static int thread3()
+{
+    while (1) {
+        printf("%d %c \n", 3, 'c');
+        fflush(stdout);
+        co_sleep (100000);
+    }
+    return 0;
+}
 
-//static int thread4()
-//{
-//    while (1) {
-//        printf("%d %c \n", 4, 'd');
-//        fflush(stdout);
-//        co_sleep (100000);
-//    }
-//    return 0;
-//}
+static int thread4()
+{
+    while (1) {
+        printf("%d %c \n", 4, 'd');
+        fflush(stdout);
+        co_sleep (100000);
+    }
+    return 0;
+}
+#endif
 
 int
 main (int argc, char **argv)
 {
-    /*
+	#ifdef ANOTHER_EXAMPLE
     int pid;
     co_run (task, (void*) 1, 1<<20);
     co_run (task, (void*) 2, 1<<20);
@@ -172,7 +168,8 @@ main (int argc, char **argv)
     co_run (task2, NULL, 1<<20);
     co_run (waiter, (void*)pid, 1<<20);
     return co_schedule ();
-    */
+    #endif
+	
     co_run (thread1, NULL, 1<<20);
     co_run (thread2, NULL, 1<<20);
     co_run (thread3, NULL, 1<<20);
